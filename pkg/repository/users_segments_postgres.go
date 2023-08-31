@@ -47,16 +47,16 @@ func (r *UsersSegmentsPostgres) UpdateUserSegments(a avito.AlteredUserSegments) 
 		err = r.db.Select(&segmentsIdToDelete, r.db.Rebind(query), args...)
 	}
 
-	//tx, err := r.db.Begin()
-	//if err != nil {
-	//	return err
-	//}
+	tx, err := r.db.Begin()
+	if err != nil {
+		return err
+	}
 
 	if len(a.Delete) != 0 {
 		query, args, err := sqlx.In(fmt.Sprintf("DELETE FROM %s WHERE user_id='%s' AND segment_id IN (?)", usersSegmentsTable, a.Id), segmentsIdToDelete)
 		_, err = r.db.Exec(r.db.Rebind(query), args...)
 		if err != nil {
-			//tx.Rollback()
+			tx.Rollback()
 			return err
 		}
 	}
@@ -76,10 +76,10 @@ func (r *UsersSegmentsPostgres) UpdateUserSegments(a avito.AlteredUserSegments) 
 		_, err := r.db.Exec(r.db.Rebind(query), vals1...)
 
 		if err != nil {
-			//tx.Rollback()
+			tx.Rollback()
 			return err
 		}
 	}
 
-	return nil
+	return tx.Commit()
 }
