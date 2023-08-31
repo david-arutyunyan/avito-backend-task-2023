@@ -19,10 +19,11 @@ func NewUsersSegmentsPostgres(db *sqlx.DB) *UsersSegmentsPostgres {
 	return &UsersSegmentsPostgres{db: db}
 }
 
-func (r *UsersSegmentsPostgres) GetUserSegmentsLogs() ([]avito.UsersSegmentsLogs, error) {
+func (r *UsersSegmentsPostgres) GetUserSegmentsLogs(date avito.CustomDate) ([]avito.UsersSegmentsLogs, error) {
 	var segments []avito.UsersSegmentsLogs
+	dateToCompare := date.Ym + "-01"
 
-	query := fmt.Sprintf("SELECT id, user_id as userId, segment_name as segmentName, operation, time FROM %s", usersSegmentsLogsTable)
+	query := fmt.Sprintf("SELECT id, user_id as userId, segment_name as segmentName, operation, time FROM %s WHERE time::date >= '%s'", usersSegmentsLogsTable, dateToCompare)
 	err := r.db.Select(&segments, query)
 	if err != nil {
 		log.Fatal(err)

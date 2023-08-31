@@ -63,9 +63,16 @@ func (h *Handler) getUserSegments(c *gin.Context) {
 }
 
 func (h *Handler) getUserSegmentsLogs(c *gin.Context) {
+	var input avito.CustomDate
+
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid input body")
+		return
+	}
+
 	c.Writer.Header().Add("Content-Disposition", `attachment; filename="logs.csv"`)
 
-	err := h.services.UsersSegments.GetUserSegmentsLogs(c.Writer)
+	err := h.services.UsersSegments.GetUserSegmentsLogs(c.Writer, input)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

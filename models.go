@@ -33,3 +33,7 @@ type UsersSegmentsLogs struct {
 	Operation   string
 	Time        time.Time
 }
+
+type CustomDate struct {
+	Ym string `json:"date" binding:"required"`
+}

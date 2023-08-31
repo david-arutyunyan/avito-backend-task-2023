@@ -23,8 +23,8 @@ func (s *UsersSegmentsService) UpdateUserSegments(a avito.AlteredUserSegments) e
 	return s.repo.UpdateUserSegments(a)
 }
 
-func (s *UsersSegmentsService) GetUserSegmentsLogs(rw http.ResponseWriter) error {
-	logs, err := s.repo.GetUserSegmentsLogs()
+func (s *UsersSegmentsService) GetUserSegmentsLogs(rw http.ResponseWriter, date avito.CustomDate) error {
+	logs, err := s.repo.GetUserSegmentsLogs(date)
 
 	err = gocsv.Marshal(logs, rw)
 	if err != nil {

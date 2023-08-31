@@ -18,7 +18,7 @@ type Segment interface {
 type UsersSegments interface {
 	GetUserSegments(userId string) ([]avito.Segment, error)
 	UpdateUserSegments(a avito.AlteredUserSegments) error
-	GetUserSegmentsLogs() ([]avito.UsersSegmentsLogs, error)
+	GetUserSegmentsLogs(date avito.CustomDate) ([]avito.UsersSegmentsLogs, error)
 }
 
 type Repository struct {

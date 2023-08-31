@@ -19,7 +19,7 @@ type Segment interface {
 type UsersSegments interface {
 	GetUserSegments(userId string) ([]avito.Segment, error)
 	UpdateUserSegments(a avito.AlteredUserSegments) error
-	GetUserSegmentsLogs(rw http.ResponseWriter) error
+	GetUserSegmentsLogs(rw http.ResponseWriter, date avito.CustomDate) error
 }
 
 type Service struct {
