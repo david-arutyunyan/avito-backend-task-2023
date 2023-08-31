@@ -15,6 +15,13 @@ definitions:
     required:
     - id
     type: object
+  avito.Segment:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
   avito.User:
     properties:
       name:
@@ -40,6 +47,77 @@ info:
   title: User Segmentation API
   version: "1.0"
 paths:
+  /segment:
+    post:
+      consumes:
+      - application/json
+      description: create a new segment
+      operationId: create-segment
+      parameters:
+      - description: segment info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/avito.Segment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: CreateSegment
+      tags:
+      - segment
+  /segment/:id:
+    delete:
+      consumes:
+      - application/json
+      description: delete segment by name
+      operationId: delete-segment
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: DeleteSegment
+      tags:
+      - segment
   /user:
     post:
       consumes:
