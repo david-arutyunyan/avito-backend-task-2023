@@ -43,11 +43,12 @@ func (h *Handler) createSegment(c *gin.Context) {
 // @ID delete-segment
 // @Accept  json
 // @Produce  json
+// @Param input body avito.Segment true "segment name"
 // @Success 200 {integer} integer 1
 // @Failure 400,404 {object} errorResponse
 // @Failure 500 {object} errorResponse
 // @Failure default {object} errorResponse
-// @Router /segment/:id [delete]
+// @Router /segment [delete]
 func (h *Handler) deleteSegment(c *gin.Context) {
 	var input avito.Segment
 

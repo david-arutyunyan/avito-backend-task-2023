@@ -43,11 +43,12 @@ func (h *Handler) createUser(c *gin.Context) {
 // @ID delete-user
 // @Accept  json
 // @Produce  json
+// @Param id path string true "the UUID of a user"
 // @Success 200 {integer} integer 1
 // @Failure 400,404 {object} errorResponse
 // @Failure 500 {object} errorResponse
 // @Failure default {object} errorResponse
-// @Router /user/:id [delete]
+// @Router /user/{id} [delete]
 func (h *Handler) deleteUser(c *gin.Context) {
 	id := c.Param("id")
 

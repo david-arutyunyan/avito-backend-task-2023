@@ -43,11 +43,12 @@ func (h *Handler) updateUserSegments(c *gin.Context) {
 // @ID get-user-segments
 // @Accept  json
 // @Produce  json
+// @Param id path string true "the UUID of a user"
 // @Success 200 {integer} integer 1
 // @Failure 400,404 {object} errorResponse
 // @Failure 500 {object} errorResponse
 // @Failure default {object} errorResponse
-// @Router /users-segments/:id [GET]
+// @Router /users-segments/{id} [GET]
 func (h *Handler) getUserSegments(c *gin.Context) {
 	id := c.Param("id")
 
@@ -62,6 +63,18 @@ func (h *Handler) getUserSegments(c *gin.Context) {
 	})
 }
 
+// @Summary GetUserSegmentsLogs
+// @Tags user_segments
+// @Description get user's segments logs
+// @ID get-user-segments-logs
+// @Accept  json
+// @Produce text/csv
+// @Param input body avito.CustomDate true "year and month"
+// @Success 200 {integer} integer 1
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /users-segments/logs [POST]
 func (h *Handler) getUserSegmentsLogs(c *gin.Context) {
 	var input avito.CustomDate
 

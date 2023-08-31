@@ -73,9 +73,7 @@ const docTemplate = `{
                         }
                     }
                 }
-            }
-        },
-        "/segment/:id": {
+            },
             "delete": {
                 "description": "delete segment by name",
                 "consumes": [
@@ -89,6 +87,17 @@ const docTemplate = `{
                 ],
                 "summary": "DeleteSegment",
                 "operationId": "delete-segment",
+                "parameters": [
+                    {
+                        "description": "segment name",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/avito.Segment"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -182,7 +191,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/:id": {
+        "/user/{id}": {
             "delete": {
                 "description": "delete user by id",
                 "consumes": [
@@ -196,6 +205,15 @@ const docTemplate = `{
                 ],
                 "summary": "DeleteUser",
                 "operationId": "delete-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "the UUID of a user",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -289,7 +307,66 @@ const docTemplate = `{
                 }
             }
         },
-        "/users-segments/:id": {
+        "/users-segments/logs": {
+            "post": {
+                "description": "get user's segments logs",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/csv"
+                ],
+                "tags": [
+                    "user_segments"
+                ],
+                "summary": "GetUserSegmentsLogs",
+                "operationId": "get-user-segments-logs",
+                "parameters": [
+                    {
+                        "description": "year and month",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/avito.CustomDate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.errorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/handler.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.errorResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/handler.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users-segments/{id}": {
             "get": {
                 "description": "get user's segments",
                 "consumes": [
@@ -303,6 +380,15 @@ const docTemplate = `{
                 ],
                 "summary": "GetUserSegments",
                 "operationId": "get-user-segments",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "the UUID of a user",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -358,6 +444,17 @@ const docTemplate = `{
                     }
                 },
                 "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "avito.CustomDate": {
+            "type": "object",
+            "required": [
+                "date"
+            ],
+            "properties": {
+                "date": {
                     "type": "string"
                 }
             }
