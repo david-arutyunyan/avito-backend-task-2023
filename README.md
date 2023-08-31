@@ -19,3 +19,4 @@
 Если вдруг возникла ошибка, связанная с файлом wait-for-postgres.sh (такого быть не должно, но может появиться), то необходимо немного изменить файлы Dockerfile и docker-compose.yml. В Dockerfile нужно удалить строку 11, а в docker-compose.yml убрать "./wait-for-postgres.sh db" из строки 6.
 
 
+
