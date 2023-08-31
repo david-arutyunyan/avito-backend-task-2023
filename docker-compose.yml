@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  todo-app:
+  avito-backend-task-2023:
     build: ./
     command: ./wait-for-postgres.sh db ./avito-backend-task-2023
     ports:
@@ -19,4 +19,4 @@ services:
     environment:
       - POSTGRES_PASSWORD=uthwtu
     ports:
-      - 5436:5432
+      - 5432:5432

@@ -36,8 +36,8 @@ definitions:
 host: localhost:8000
 info:
   contact: {}
-  description: API Server for TodoList Application
-  title: Todo App API
+  description: API Service for user's segments
+  title: User Segmentation API
   version: "1.0"
 paths:
   /user:
