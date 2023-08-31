@@ -6,6 +6,18 @@ import (
 	"net/http"
 )
 
+// @Summary CreateSegment
+// @Tags segment
+// @Description create a new segment
+// @ID create-segment
+// @Accept  json
+// @Produce  json
+// @Param input body avito.Segment true "segment info"
+// @Success 200 {integer} integer 1
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /segment [post]
 func (h *Handler) createSegment(c *gin.Context) {
 	var input avito.Segment
 
@@ -25,6 +37,17 @@ func (h *Handler) createSegment(c *gin.Context) {
 	})
 }
 
+// @Summary DeleteSegment
+// @Tags segment
+// @Description delete segment by name
+// @ID delete-segment
+// @Accept  json
+// @Produce  json
+// @Success 200 {integer} integer 1
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /segment/:id [delete]
 func (h *Handler) deleteSegment(c *gin.Context) {
 	var input avito.Segment
 

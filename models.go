@@ -1,5 +1,7 @@
 package avito
 
+import "time"
+
 type User struct { // Сущность пользователя (поля совпадают с полями в БД)
 	Id       string `json:"-" db:"id"`
 	Name     string `json:"name" binding:"required"`
@@ -22,4 +24,12 @@ type AlteredUserSegments struct {
 	Id     string   `json:"id" binding:"required"`
 	Add    []string `json:"add"`
 	Delete []string `json:"delete"`
+}
+
+type UsersSegmentsLogs struct {
+	Id          string
+	UserId      string
+	SegmentName string
+	Operation   string
+	Time        time.Time
 }

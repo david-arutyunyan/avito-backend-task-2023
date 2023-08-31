@@ -61,3 +61,18 @@ func (h *Handler) getUserSegments(c *gin.Context) {
 		Data: lists,
 	})
 }
+
+func (h *Handler) getUserSegmentsLogs(c *gin.Context) {
+	c.Writer.Header().Add("Content-Disposition", `attachment; filename="logs.csv"`)
+
+	err := h.services.UsersSegments.GetUserSegmentsLogs(c.Writer)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	return
+	//c.JSON(http.StatusOK, getAllListsResponse{
+	//	Data: lists,
+	//})
+}

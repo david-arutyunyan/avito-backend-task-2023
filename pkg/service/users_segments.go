@@ -3,6 +3,8 @@ package service
 import (
 	avito "avito-backend-task-2023"
 	"avito-backend-task-2023/pkg/repository"
+	"github.com/gocarina/gocsv"
+	"net/http"
 )
 
 type UsersSegmentsService struct {
@@ -19,4 +21,15 @@ func (s *UsersSegmentsService) GetUserSegments(userId string) ([]avito.Segment, 
 
 func (s *UsersSegmentsService) UpdateUserSegments(a avito.AlteredUserSegments) error {
 	return s.repo.UpdateUserSegments(a)
+}
+
+func (s *UsersSegmentsService) GetUserSegmentsLogs(rw http.ResponseWriter) error {
+	logs, err := s.repo.GetUserSegmentsLogs()
+
+	err = gocsv.Marshal(logs, rw)
+	if err != nil {
+		return err
+	}
+
+	return err
 }

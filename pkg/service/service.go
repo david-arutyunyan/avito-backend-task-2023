@@ -3,6 +3,7 @@ package service
 import (
 	avito "avito-backend-task-2023"
 	"avito-backend-task-2023/pkg/repository"
+	"net/http"
 )
 
 type User interface {
@@ -18,6 +19,7 @@ type Segment interface {
 type UsersSegments interface {
 	GetUserSegments(userId string) ([]avito.Segment, error)
 	UpdateUserSegments(a avito.AlteredUserSegments) error
+	GetUserSegmentsLogs(rw http.ResponseWriter) error
 }
 
 type Service struct {

@@ -1,12 +1,11 @@
 package handler
 
 import (
+	_ "avito-backend-task-2023/docs"
 	"avito-backend-task-2023/pkg/service"
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/files"
-	"github.com/swaggo/gin-swagger"
-
-	_ "avito-backend-task-2023/docs"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type Handler struct {
@@ -38,10 +37,11 @@ func (h *Handler) InitRoutes() *gin.Engine { // Инициализатор вс�
 		{
 			usersSegments.POST("/", h.updateUserSegments)
 			usersSegments.GET("/:id", h.getUserSegments)
+			usersSegments.GET("/", h.getUserSegmentsLogs)
 		}
-	}
 
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+		usersSegService.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	}
 
 	return router
 }

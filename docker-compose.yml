@@ -9,14 +9,18 @@ services:
     depends_on:
       - db
     environment:
-      - POSTGRES_PASSWORD=uthwtu
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
   db:
     restart: always
     image: postgres:latest
     volumes:
-      - ./.database/postgres/data:/var/lib/postgresql/data
+      - pg_data_volume:/data/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      - POSTGRES_PASSWORD=uthwtu
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - 5432:5432
+
+volumes:
+  pg_data_volume:
