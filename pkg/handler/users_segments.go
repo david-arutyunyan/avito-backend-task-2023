@@ -92,7 +92,4 @@ func (h *Handler) getUserSegmentsLogs(c *gin.Context) {
 	}
 
 	return
-	//c.JSON(http.StatusOK, getAllListsResponse{
-	//	Data: lists,
-	//})
 }
